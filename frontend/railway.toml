@@ -3,6 +3,7 @@ builder = "nixpacks"
 
 [deploy]
 startCommand = "npm start"
+# Railway injects $PORT — next start reads it via package.json
 healthcheckPath = "/"
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"
