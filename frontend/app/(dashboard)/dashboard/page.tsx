@@ -57,7 +57,7 @@ function HeatCell({ value, min, max }: { value:number; min:number; max:number })
   const bg = value<0 ? `rgba(239,68,68,${Math.abs(value)})` : `rgba(29,158,117,${t})`
   const txt= Math.abs(t-0.5)>0.25 ? '#fff' : '#1c1c1a'
   return (
-    <td style={{background:bg,color:txt}}
+    <td
       className="text-center p-0.5 sm:p-1 border border-sand-50 font-mono cursor-default hover:opacity-80 transition-opacity"
       title={value.toFixed(3)} style={{background:bg,color:txt,fontSize:'10px',minWidth:'36px'}}>
       {value.toFixed(2)}

@@ -233,7 +233,7 @@ export default function LandingPage() {
       <section id="locations" className="py-16 sm:py-24 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="font-display text-3xl sm:text-4xl text-brand-900 mb-3 sm:mb-4">Covering Egypt's top property markets</h2>
+            <h2 className="font-display text-3xl sm:text-4xl text-brand-900 mb-3 sm:mb-4">Covering Egypt&apos;s top property markets</h2>
             <p className="text-sand-600 text-base sm:text-lg">Full market data for 35+ locations across Egypt.</p>
           </div>
           <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
