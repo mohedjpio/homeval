@@ -8,7 +8,7 @@ import {
   PieChart, Pie, Cell, Legend, ReferenceLine,
 } from 'recharts'
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API = ''
 const C = ['#1d9e75','#F59E0B','#6366F1','#EF4444','#14B8A6','#EC4899','#8B5CF6','#F97316','#0EA5E9','#84CC16']
 
 const fmt    = (n: number) => n>=1e6?`${(n/1e6).toFixed(1)}M`:n>=1e3?`${(n/1e3).toFixed(0)}K`:String(Math.round(n))
@@ -72,7 +72,7 @@ export default function DashboardPage() {
   const [busy, setBusy] = useState(true)
 
   useEffect(() => {
-    fetch(`${API}/api/v1/analytics`, { headers:{ Authorization:`Bearer ${getToken()}` } })
+    fetch(`${API}/api/proxy/analytics`, { headers:{ Authorization:`Bearer ${getToken()}` } })
       .then(r=>r.json()).then(d=>{ setData(d); setBusy(false) })
       .catch(()=>{ setErr('Failed to load analytics. Is the backend running?'); setBusy(false) })
   }, [])

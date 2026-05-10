@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { authLogin } from '@/lib/api'
 import { saveAuth } from '@/lib/auth'
 
-const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+const API = ''
 
 export default function LoginPage() {
   const router = useRouter()
@@ -18,7 +18,7 @@ export default function LoginPage() {
 
   async function checkDB() {
     try {
-      const r = await fetch(`${API}/api/v1/auth/check`)
+      const r = await fetch(`${API}/api/proxy/auth/check`)
       const d = await r.json()
       setDb(d.status === 'ok' ? 'ok' : 'error')
       if (d.status !== 'ok') setError(`DB error: ${d.detail || 'Cannot connect to Supabase'}`)

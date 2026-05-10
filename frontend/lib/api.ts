@@ -1,9 +1,14 @@
 import axios from 'axios'
 import { getToken, clearAuth } from './auth'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+// Browser requests go to /api/proxy/* (Next.js server-side proxy → backend at runtime)
+// SSR requests go direct using server-side API_URL env var
+const BASE =
+  typeof window !== 'undefined'
+    ? '/api/proxy'
+    : (process.env.API_URL || process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/v1'
 
-const api = axios.create({ baseURL: `${API_URL}/api/v1` })
+const api = axios.create({ baseURL: BASE })
 
 api.interceptors.request.use((config) => {
   const token = getToken()
