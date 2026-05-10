@@ -145,7 +145,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </Link>
         {/* Active page label */}
         <span className="ml-auto text-xs text-sand-400 capitalize">
-          {NAV.find(n => n.pathname === pathname)?.label || NAV.find(n => pathname.startsWith(n.href))?.label || ''}
+          {NAV.find(n => n.href === pathname)?.label || NAV.find(n => pathname.startsWith(n.href))?.label || ''}
         </span>
       </div>
 
