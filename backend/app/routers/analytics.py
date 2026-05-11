@@ -4,6 +4,21 @@ import logging, pathlib
 import numpy as np
 
 router = APIRouter()
+
+import math
+
+def sanitize(obj):
+    """Recursively replace NaN/Inf with 0 so JSON serializes cleanly."""
+    if isinstance(obj, float):
+        if math.isnan(obj) or math.isinf(obj):
+            return 0
+        return obj
+    if isinstance(obj, dict):
+        return {k: sanitize(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize(i) for i in obj]
+    return obj
+
 logger = logging.getLogger(__name__)
 _cache = None
 
@@ -81,19 +96,22 @@ def compute_analytics():
         df = ensure_columns(df)
 
         # Recompute derived columns from real data
-        df["price_per_sqm"]       = df["price_egp"] / df["area_sqm"].clip(lower=1)
-        df["sqm_market_rate_egp"] = df["price_per_sqm"]
-        df["overpriced"]          = (df["price_egp"] > df["price_egp"].median() * 1.15).astype(int)
+        df["price_per_sqm"] = df["price_egp"] / df["area_sqm"].clip(lower=1)
+        # Use sqm_market_rate_egp from CSV if available, else fallback
+        if "sqm_market_rate_egp" not in df.columns or df["sqm_market_rate_egp"].isna().all():
+            df["sqm_market_rate_egp"] = df["price_per_sqm"]
+        df["overpriced"] = (df["price_egp"] > df["sqm_market_rate_egp"] * df["area_sqm"] * 1.15).astype(int)
 
         for c in ["has_pool","has_gym","has_security","has_elevator","has_balcony","is_compound"]:
             df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0).astype(int)
         df["amenity_score"] = df[["has_pool","has_gym","has_security",
                                    "has_elevator","has_balcony","is_compound"]].sum(axis=1)
 
-        # Compute ROI & yield from real price data
-        median_p = df["price_egp"].median()
-        df["roi_pct"]      = ((df["price_egp"] * 1.1 - df["price_egp"]) / df["price_egp"] * 100).clip(0, 50)
-        df["rental_yield"] = (df["price_per_sqm"] * df["area_sqm"] * 0.06 / df["price_egp"] * 100).clip(0, 20)
+        # ROI: (market_value - price) / price * 100
+        market_val = df["sqm_market_rate_egp"] * df["area_sqm"]
+        df["roi_pct"]      = ((market_val - df["price_egp"]) / df["price_egp"] * 100).clip(-50, 100)
+        # Yield: annual rent (6% of market value) / price
+        df["rental_yield"] = (market_val * 0.06 / df["price_egp"] * 100).clip(0, 20)
 
         # ML model
         feats = ["area_sqm","bedrooms","bathrooms","floor_number","building_age_years",
@@ -274,6 +292,7 @@ def compute_analytics():
                 {"icon":"📊","title":f"ML R²={r2}","text":f"Model explains {round(r2*100,1)}% of price variance.","tag":"Model"},
             ],
         }
+        _cache = sanitize(_cache)
         logger.info("Analytics cached — %d rows, %d areas, R²=%.4f", len(df), len(by_area), r2)
         return _cache
     except Exception as e:
