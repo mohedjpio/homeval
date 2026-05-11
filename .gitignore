@@ -32,7 +32,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # ── Data (large CSV — not needed in production) ────────────
-backend/ml/*.csv
+# backend/ml/*.csv  (CSV files are included)
 
 # ── OS / Editor ────────────────────────────────────────────
 .DS_Store
