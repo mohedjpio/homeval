@@ -206,7 +206,7 @@ def _train_fresh_model(save_path: Path) -> dict:
 
     save_path.parent.mkdir(parents=True, exist_ok=True)
     joblib.dump(bundle, save_path)
-    logger.info("Fresh model saved — R²=%.4f  MAE=%,.0f", r2, mae)
+    logger.info("Fresh model saved — R2=%.4f  MAE=%.0f  (MAE EGP: %s)", r2, mae, f"{mae:,.0f}")
     return bundle
 
 
