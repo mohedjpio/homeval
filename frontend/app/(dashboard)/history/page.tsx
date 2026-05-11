@@ -50,7 +50,7 @@ export default function HistoryPage() {
         </div>
       ) : (
         <div className="space-y-2 sm:space-y-3">
-          {preds.map(p => (
+          {(preds||[]).map(p => (
             <div key={p.id}
               className="bg-white rounded-xl border border-sand-200 px-4 py-3 sm:px-5 sm:py-4 flex items-start sm:items-center justify-between gap-3 hover:border-sand-300 transition-colors">
 

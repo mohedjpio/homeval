@@ -222,12 +222,12 @@ export default function DashboardPage() {
 
           <Card title="Buyer Segments" sub="Properties per budget range">
             <ResponsiveContainer width="100%" height={200}>
-              <BarChart data={price_buckets} layout="vertical" margin={{top:4,right:30,left:36,bottom:4}}>
+              <BarChart data={price_buckets||[]} layout="vertical" margin={{top:4,right:30,left:36,bottom:4}}>
                 <XAxis type="number" tick={{fontSize:9}} tickFormatter={v=>v>=1000?`${(v/1000).toFixed(0)}K`:v}/>
                 <YAxis dataKey="label" type="category" tick={{fontSize:10}} width={36}/>
                 <Tooltip formatter={(v:any)=>[v.toLocaleString(),'Properties']}/>
                 <Bar dataKey="count" radius={[0,4,4,0]}>
-                  {price_buckets.map((_:any,i:number)=><Cell key={i} fill={C[i]}/>)}
+                  {(price_buckets||[]).map((_:any,i:number)=><Cell key={i} fill={C[i]}/>)}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>

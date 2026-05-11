@@ -72,7 +72,7 @@ export default function ChatPage() {
                 </button>
               </div>
               <div className="flex-1 overflow-y-auto p-2 space-y-1">
-                {sessions.map((s:any)=>(
+                {(sessions||[]).map((s:any)=>(
                   <button key={s.id} onClick={()=>{ setSessionId(s.id); setMessages([]); setSidebar(false) }}
                     className={cn('w-full text-left text-xs px-3 py-2 rounded-lg truncate transition-colors min-h-[36px]',
                       sessionId===s.id?'bg-brand-50 text-brand-700':'text-sand-600 hover:bg-sand-100')}>
@@ -91,7 +91,7 @@ export default function ChatPage() {
             + New chat
           </button>
           <div className="flex-1 overflow-y-auto space-y-1 min-h-0">
-            {sessions.map((s:any)=>(
+            {(sessions||[]).map((s:any)=>(
               <button key={s.id} onClick={()=>{ setSessionId(s.id); setMessages([]) }}
                 className={cn('w-full text-left text-xs px-3 py-2 rounded-lg truncate transition-colors min-h-[36px]',
                   sessionId===s.id?'bg-brand-50 text-brand-700':'text-sand-600 hover:bg-sand-100')}>
@@ -141,7 +141,7 @@ export default function ChatPage() {
               </div>
             )}
 
-            {messages.map((m,i)=>(
+            {(messages||[]).map((m,i)=>(
               <div key={i} className={cn('flex gap-2', m.role==='user'?'justify-end':'justify-start')}>
                 {m.role==='assistant' && (
                   <div className="w-7 h-7 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-xs flex-shrink-0 mt-1">H</div>
