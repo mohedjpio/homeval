@@ -136,7 +136,12 @@ def compute_analytics():
             df["_b"] = pd.cut(df[col], bins=bins, labels=labels)
             r = df.groupby("_b", observed=True)["price_egp"].agg(["mean","median","count"]).reset_index()
             r.columns = ["band","mean","median","count"]
-            return r.fillna(0).round(0).to_dict("records")
+            # Convert Categorical band column to string before fillna
+            r["band"] = r["band"].astype(str)
+            r["mean"]   = pd.to_numeric(r["mean"],   errors="coerce").fillna(0)
+            r["median"] = pd.to_numeric(r["median"], errors="coerce").fillna(0)
+            r["count"]  = pd.to_numeric(r["count"],  errors="coerce").fillna(0)
+            return r.round(0).to_dict("records")
 
         def safe_col(col):
             return col in df.columns
