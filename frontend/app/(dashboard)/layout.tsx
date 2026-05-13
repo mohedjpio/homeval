@@ -13,6 +13,7 @@ const NAV = [
   { href:'/chat',      label:'AI Assistant',icon:'◇' },
   { href:'/history',   label:'History',     icon:'◫' },
   { href:'/settings',  label:'Settings',    icon:'◉' },
+  { href:'/docs',      label:'Docs',        icon:'⊞' },
 ]
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
