@@ -57,6 +57,7 @@ export default function LandingPage() {
             <a href="#features"    className="hover:text-brand-600 transition-colors">Features</a>
             <a href="#how-it-works"className="hover:text-brand-600 transition-colors">How it works</a>
             <a href="#locations"   className="hover:text-brand-600 transition-colors">Coverage</a>
+            <Link href="/docs" className="hover:text-brand-600 transition-colors">Docs</Link>
           </div>
 
           {/* Desktop CTA */}
@@ -94,6 +95,7 @@ export default function LandingPage() {
             <a href="#features"     onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Features</a>
             <a href="#how-it-works" onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">How it works</a>
             <a href="#locations"    onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Coverage</a>
+            <Link href="/docs" onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Docs</Link>
             <div className="pt-2 flex flex-col gap-2">
               {authed ? (
                 <Link href="/dashboard" className="block w-full text-center bg-brand-500 text-white font-medium py-2.5 rounded-xl text-sm" onClick={()=>setMenuOpen(false)}>
