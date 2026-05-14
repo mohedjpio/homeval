@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="96" fill="#04342c"/>
+
+  <!-- House silhouette -->
+  <path d="M256 96L96 240V416H196V312H316V416H416V240L256 96Z" fill="#1d9e75"/>
+
+  <!-- Roof highlight -->
+  <path d="M256 96L96 240H181L256 168L331 240H416L256 96Z" fill="#9FE1CB"/>
+
+  <!-- Door -->
+  <rect x="216" y="312" width="80" height="104" rx="40" fill="#04342c"/>
+
+  <!-- H letter in door arch -->
+  <text x="256" y="385" font-family="Georgia, serif" font-size="72" font-weight="700"
+        text-anchor="middle" fill="#9FE1CB" letter-spacing="-2">H</text>
+
+  <!-- Chimney -->
+  <rect x="300" y="110" width="36" height="60" rx="4" fill="#1d9e75"/>
+
+  <!-- Window left -->
+  <rect x="136" y="272" width="56" height="56" rx="8" fill="#9FE1CB" opacity="0.3"/>
+  <line x1="164" y1="272" x2="164" y2="328" stroke="#9FE1CB" stroke-width="3" opacity="0.5"/>
+  <line x1="136" y1="300" x2="192" y2="300" stroke="#9FE1CB" stroke-width="3" opacity="0.5"/>
+
+  <!-- Window right -->
+  <rect x="320" y="272" width="56" height="56" rx="8" fill="#9FE1CB" opacity="0.3"/>
+  <line x1="348" y1="272" x2="348" y2="328" stroke="#9FE1CB" stroke-width="3" opacity="0.5"/>
+  <line x1="320" y1="300" x2="376" y2="300" stroke="#9FE1CB" stroke-width="3" opacity="0.5"/>
+</svg>
