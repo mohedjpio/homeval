@@ -8,14 +8,11 @@ import { getUser, clearAuth, isLoggedIn, User } from '@/lib/auth'
 import { avatarUrl } from '@/lib/cloudinary'
 
 const NAV = [
-  { href:'/dashboard', label:'Analytics',   icon:'◈' },
-  { href:'/predict',   label:'Predict',     icon:'◎' },
-  { href:'/chat',      label:'AI Assistant',icon:'◇' },
-  { href:'/history',   label:'History',     icon:'◫' },
-  { href:'/settings',  label:'Settings',    icon:'◉' },
-  { href:'/docs',      label:'Docs',        icon:'⊞' },
-  { href:'/team',      label:'Team',        icon:'◉' },
-  { href:'/analytics-guide', label:'Guide',   icon:'◇' },
+  { href:'/dashboard',       label:'Analytics',  icon:'◈' },
+  { href:'/predict',         label:'Predict',    icon:'◎' },
+  { href:'/chat',            label:'AI Chat',    icon:'◇' },
+  { href:'/history',         label:'History',    icon:'◫' },
+  { href:'/settings',        label:'Settings',   icon:'◉' },
 ]
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
