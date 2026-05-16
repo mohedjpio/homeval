@@ -81,14 +81,14 @@ const TEAM: {
     photo: '/team/2220470.jpg',
   },
   {
-    id: '2220532',
-    name: 'Yousef Adel Ahmed Zaki',
-    nameAr: 'يوسف عادل أحمد ذكي',
+    id: '2220409',
+    name: 'Mohamed Maher Abu Arab',
+    nameAr: 'محمد ماهر أبو عرب',
     role: 'Member',
     specialty: 'UI/UX Design',
-    initials: 'YA',
+    initials: 'MM',
     color: 'from-indigo-500 to-indigo-700',
-    photo: '/team/2220532.jpg',
+    photo: '/team/2220409.jpg',
   },
 ]
 
