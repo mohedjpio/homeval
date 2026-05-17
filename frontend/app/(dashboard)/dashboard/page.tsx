@@ -127,7 +127,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
         <div>
-          <h1 className="font-display text-xl sm:text-2xl text-brand-900">Market Analytics</h1>
+          <h1 className="font-display text-lg sm:text-2xl text-brand-900">Market Analytics</h1>
           <p className="text-sand-400 text-xs mt-0.5">
             {kpis.total_props?.toLocaleString()} properties · R²={kpis.r2_score} · MAE={fmtEGP(kpis.mae)}
           </p>
@@ -139,7 +139,7 @@ export default function DashboardPage() {
       </div>
 
       {/* KPIs — 2 cols mobile → 5 cols tablet → 10 cols desktop */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 gap-2 sm:gap-3">
+      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 gap-2 sm:gap-3">
         <KPI label="Avg Price"     value={fmtEGP(kpis.avg_price)}          sub="All props"     icon="🏠" color="text-brand-600"/>
         <KPI label="Median"        value={fmtEGP(kpis.median_price)}        sub="50th pct"      icon="📊" color="text-brand-600"/>
         <KPI label="Price/m²"      value={fmtEGP(kpis.avg_price_per_sqm)}   sub="Market rate"   icon="📐" color="text-amber-600"/>
@@ -153,7 +153,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Tabs — horizontal scroll on mobile */}
-      <div className="flex gap-1 overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap scrollbar-none">
+      <div className="flex gap-1.5 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap" style={{scrollbarWidth:'none',msOverflowStyle:'none'}}>
         {TABS.map(t => (
           <button key={t.id} onClick={()=>setTab(t.id)}
             className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all whitespace-nowrap flex-shrink-0
@@ -167,8 +167,8 @@ export default function DashboardPage() {
       {tab==='descriptive' && (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
           <Card title="Price by Area (Top 20)" sub="Average EGP">
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={sortedArea.slice(0,20)} margin={{top:4,right:4,left:0,bottom:100}}>
+            <ResponsiveContainer width="100%" height={320}>
+              <BarChart data={sortedArea.slice(0,20)} margin={{top:4,right:4,left:0,bottom:110}}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0efe9"/>
                 <XAxis dataKey="area" tick={{fontSize:8}} angle={-45} textAnchor="end" interval={0}/>
                 <YAxis tick={{fontSize:9}} tickFormatter={v=>`${(v/1e6).toFixed(0)}M`} width={34}/>
@@ -181,7 +181,7 @@ export default function DashboardPage() {
           </Card>
 
           <Card title="Price Distribution" sub="Histogram — millions EGP">
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={250}>
               <BarChart data={price_hist} margin={{top:4,right:4,left:0,bottom:20}}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0efe9"/>
                 <XAxis dataKey="bin" tick={{fontSize:9}} tickFormatter={v=>`${v}M`}/>
@@ -195,8 +195,8 @@ export default function DashboardPage() {
           </Card>
 
           <Card title="Property Type Mix" sub="Count by type">
-            <div className="flex flex-col sm:flex-row gap-3 items-center">
-              <div className="w-full sm:w-auto flex justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center sm:justify-start">
+              <div className="w-full sm:w-auto flex justify-center flex-shrink-0">
                 <PieChart width={160} height={160}>
                   <Pie data={property_types||[]} dataKey="count" nameKey="property_type"
                     cx={80} cy={80} outerRadius={72}
@@ -313,7 +313,7 @@ export default function DashboardPage() {
                 <tbody>
                   {Object.entries(univ||{}).map(([col, s]: any, i) => (
                     <tr key={col} className={`border-b border-sand-50 hover:bg-sand-50 ${i%2===0?'':'bg-sand-50/30'}`}>
-                      <td className="px-2 sm:px-3 py-1.5 font-medium text-brand-800 whitespace-nowrap">{col.replace(/_/g,' ')}</td>
+                      <td className="px-2 sm:px-3 py-1.5 font-medium text-brand-800 whitespace-nowrap sticky left-0 bg-white z-10">{col.replace(/_/g,' ')}</td>
                       <td className="px-2 sm:px-3 py-1.5 text-sand-700">{col.includes('price')||col.includes('rate')?fmtEGP(s.mean):Number(s.mean).toLocaleString()}</td>
                       <td className="px-2 sm:px-3 py-1.5 text-sand-700">{col.includes('price')||col.includes('rate')?fmtEGP(s.median):Number(s.median).toLocaleString()}</td>
                       <td className="px-2 sm:px-3 py-1.5 text-sand-500">{Number(s.std).toLocaleString()}</td>
@@ -373,7 +373,7 @@ export default function DashboardPage() {
                 <tbody>
                   {(corr_labels||[]).map((row:string,ri:number)=>(
                     <tr key={row}>
-                      <td className="pr-2 text-right text-sand-500 font-medium whitespace-nowrap" style={{fontSize:9}}>{row}</td>
+                      <td className="pr-2 text-right text-sand-500 font-medium whitespace-nowrap sticky left-0 bg-white z-10 text-xs">{row}</td>
                       {(corr_labels||[]).map((_:string,ci:number)=>{
                         const cell=(corr_data||[]).find((d:any)=>d.row===row&&d.col===corr_labels[ci])
                         return <HeatCell key={ci} value={cell?.value||0} min={-1} max={1}/>
@@ -490,7 +490,7 @@ export default function DashboardPage() {
 
       {/* ── DIAGNOSTIC ────────────────────────────────────────────── */}
       {tab==='diagnostic' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {[
             {title:'Metro Distance vs Price', data:metro_price,  key:'mean',  sub:'Proximity premium'},
             {title:'Center Distance vs Price',data:center_price, key:'mean',  sub:'City-center premium'},
@@ -565,7 +565,7 @@ export default function DashboardPage() {
             </ResponsiveContainer>
           </Card>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
             {[
               {step:'01',title:'Preprocessing',bg:'bg-brand-50 border-brand-100',items:['30K Egyptian properties','Feature engineering: ROI, yield, price/m²','Label encode 6 categorical columns','80/20 train-test split']},
               {step:'02',title:'Random Forest',bg:'bg-amber-50 border-amber-100',items:[`R² = ${kpis.r2_score}`,`MAE = ${fmtEGP(kpis.mae)}`,'100 trees, max_depth=10','22 input features']},
@@ -606,10 +606,10 @@ export default function DashboardPage() {
 
       {/* ── INVESTMENT ────────────────────────────────────────────── */}
       {tab==='investment' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           <Card title="ROI by Location" sub="Positive = undervalued vs market">
             <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={roiSorted.slice(0,20)} margin={{top:4,right:4,left:0,bottom:100}}>
+              <BarChart data={roiSorted.slice(0,20)} margin={{top:4,right:4,left:0,bottom:110}}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0efe9"/>
                 <XAxis dataKey="area" tick={{fontSize:8}} angle={-45} textAnchor="end" interval={0}/>
                 <YAxis tick={{fontSize:9}} tickFormatter={v=>`${v.toFixed(1)}%`} width={36}/>
@@ -624,7 +624,7 @@ export default function DashboardPage() {
 
           <Card title="Rental Yield by Area" sub="Est. annual yield %">
             <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={roiSorted.slice(0,20)} margin={{top:4,right:4,left:0,bottom:100}}>
+              <BarChart data={roiSorted.slice(0,20)} margin={{top:4,right:4,left:0,bottom:110}}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#f0efe9"/>
                 <XAxis dataKey="area" tick={{fontSize:8}} angle={-45} textAnchor="end" interval={0}/>
                 <YAxis tick={{fontSize:9}} tickFormatter={v=>`${v.toFixed(1)}%`} width={36}/>
@@ -638,7 +638,7 @@ export default function DashboardPage() {
             <div className="space-y-2 overflow-y-auto max-h-64">
               {(compound_premium||[]).sort((a:any,b:any)=>b.premium_pct-a.premium_pct).slice(0,15).map((c:any,i:number)=>(
                 <div key={i} className="flex items-center gap-2 text-xs">
-                  <span className="text-sand-500 truncate w-24 shrink-0">{c.area}</span>
+                  <span className="text-sand-500 truncate w-20 sm:w-28 shrink-0 text-xs">{c.area}</span>
                   <div className="flex-1 h-2.5 bg-sand-100 rounded-full overflow-hidden">
                     <div className="h-full rounded-full" style={{width:`${Math.min(100,Math.abs(c.premium_pct)/100*100)}%`,background:c.premium_pct>0?'#1d9e75':'#EF4444'}}/>
                   </div>
@@ -696,7 +696,7 @@ export default function DashboardPage() {
                 return (
                   <div key={i}>
                     <div className="flex justify-between text-xs text-sand-500 mb-0.5">
-                      <span className="truncate w-28">{a.area}</span>
+                      <span className="truncate w-20 sm:w-28 text-xs">{a.area}</span>
                       <span className="shrink-0 ml-1">{fmtEGP(a.p50)}</span>
                     </div>
                     <div className="relative h-2.5 bg-sand-100 rounded-full">
@@ -772,7 +772,7 @@ export default function DashboardPage() {
                 <tbody>
                   {(by_area||[]).map((a:any,i:number)=>(
                     <tr key={i} className={`border-b border-sand-50 hover:bg-sand-50 ${i%2?'bg-sand-50/30':''}`}>
-                      <td className="px-2 py-1.5 font-medium text-brand-800 whitespace-nowrap">{a.area}</td>
+                      <td className="px-2 py-1.5 font-medium text-brand-800 whitespace-nowrap sticky left-0 bg-white z-10">{a.area}</td>
                       <td className="px-2 py-1.5 text-sand-600">{a.count?.toLocaleString()}</td>
                       <td className="px-2 py-1.5 font-medium">{fmtEGP(a.avg_price)}</td>
                       <td className="px-2 py-1.5">{fmtEGP(a.median_price)}</td>
@@ -800,7 +800,7 @@ export default function DashboardPage() {
 
       {/* ── RISK ──────────────────────────────────────────────────── */}
       {tab==='risk' && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
           <Card title="Overpriced % by Area" sub=">15% above base_value_egp" className="sm:col-span-2">
             <ResponsiveContainer width="100%" height={280}>
               <BarChart data={[...(by_area||[])].sort((a:any,b:any)=>b.overpriced_pct-a.overpriced_pct).slice(0,20)} margin={{top:4,right:4,left:0,bottom:100}}>
@@ -851,7 +851,7 @@ export default function DashboardPage() {
       {/* ── AI INSIGHTS ───────────────────────────────────────────── */}
       {tab==='insights' && (
         <div className="space-y-4 sm:space-y-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
             {(insights||[]).map((ins:any,i:number)=>(
               <div key={i} className="bg-white rounded-xl border border-sand-200 p-4 hover:shadow-md transition-shadow">
                 <div className="flex items-center justify-between mb-2">
@@ -878,7 +878,7 @@ export default function DashboardPage() {
                   {(by_area||[]).map((a:any,i:number)=>(
                     <tr key={i} className={`border-b border-sand-50 hover:bg-brand-50 transition-colors ${i%2?'bg-sand-50/40':''}`}>
                       <td className="px-2 py-1.5 text-sand-400 font-mono text-xs">{i+1}</td>
-                      <td className="px-2 py-1.5 font-semibold text-brand-800 whitespace-nowrap text-xs">{a.area}</td>
+                      <td className="px-2 py-1.5 font-semibold text-brand-800 whitespace-nowrap text-xs sticky left-0 bg-white z-10">{a.area}</td>
                       <td className="px-2 py-1.5 font-medium text-xs">{fmtEGP(a.avg_price)}</td>
                       <td className="px-2 py-1.5 text-sand-600 text-xs">{fmtEGP(a.median_price)}</td>
                       <td className="px-2 py-1.5 text-xs">{fmtEGP(a.avg_price_sqm)}</td>

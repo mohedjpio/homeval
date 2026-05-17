@@ -43,7 +43,7 @@ const TEAM = [
   },
   {
     id: '2220436',
-    name: 'Mohamed Essam Mahmoud Adel',
+    name: 'Mahmoud Essam Mahmoud Adel',
     nameAr: 'محمد عصام محمود عادل',
     role: 'Member' as const,
     specialty: 'Machine Learning',
