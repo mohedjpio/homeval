@@ -113,7 +113,7 @@ export default function PredictPage() {
   ]
 
   return (
-    <div className="w-full max-w-6xl mx-auto animate-fade-up">
+    <div className="w-full max-w-6xl mx-auto animate-fade-up overflow-x-hidden">
 
       {/* ── Header ── */}
       <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">

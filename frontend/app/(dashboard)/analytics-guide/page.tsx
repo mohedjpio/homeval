@@ -406,7 +406,7 @@ export default function AnalyticsGuidePage() {
   const totalAnalyses = SECTIONS.reduce((sum, s) => sum + s.analyses.length, 0)
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto py-2 sm:py-4 space-y-4 sm:space-y-6 overflow-x-hidden">
 
       {/* Header */}
       <div>

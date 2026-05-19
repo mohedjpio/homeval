@@ -23,14 +23,14 @@ export default function HistoryPage() {
   }
 
   if (loading) return (
-    <div className="max-w-3xl mx-auto space-y-3 animate-fade-up">
+    <div className="max-w-3xl mx-auto space-y-3 animate-fade-up overflow-x-hidden">
       <div className="h-7 w-40 shimmer rounded-lg mb-6"/>
       {[...Array(5)].map((_,i) => <div key={i} className="h-20 sm:h-24 shimmer rounded-xl"/>)}
     </div>
   )
 
   return (
-    <div className="w-full max-w-3xl mx-auto animate-fade-up">
+    <div className="w-full max-w-3xl mx-auto animate-fade-up overflow-x-hidden">
       <div className="mb-6 sm:mb-8">
         <h1 className="font-display text-2xl sm:text-3xl text-brand-900 mb-1">Prediction History</h1>
         <p className="text-sand-600 text-sm">

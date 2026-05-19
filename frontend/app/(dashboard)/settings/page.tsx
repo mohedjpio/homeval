@@ -100,7 +100,7 @@ export default function SettingsPage() {
     : '—'
 
   if (loading) return (
-    <div className="max-w-2xl mx-auto space-y-4 animate-fade-up pt-2">
+    <div className="max-w-2xl mx-auto space-y-4 animate-fade-up pt-2 overflow-x-hidden">
       <div className="h-8 w-40 shimmer rounded-lg mb-8" />
       <div className="h-56 shimmer rounded-3xl" />
       <div className="h-44 shimmer rounded-3xl" />
@@ -109,7 +109,7 @@ export default function SettingsPage() {
   )
 
   return (
-    <div className="w-full max-w-2xl mx-auto animate-fade-up pb-12">
+    <div className="w-full max-w-2xl mx-auto animate-fade-up pb-12 overflow-x-hidden">
 
       {/* ── Page header ── */}
       <div className="mb-8 sm:mb-10">

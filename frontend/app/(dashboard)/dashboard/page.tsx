@@ -31,7 +31,7 @@ const Tip = ({ active, payload, label }: any) => {
 
 function KPI({label,value,sub,color='text-brand-600',icon}:any){
   return(
-    <div className="bg-white rounded-xl border border-sand-200 p-2.5 sm:p-3">
+    <div className="bg-white rounded-xl border border-sand-200 p-2.5 sm:p-3 min-w-0 overflow-hidden">
       <div className="flex justify-between items-start mb-1">
         <p className="text-[9px] sm:text-[10px] uppercase tracking-wide text-sand-400 font-medium leading-tight pr-1">{label}</p>
         <span className="text-xs sm:text-sm flex-shrink-0">{icon}</span>
@@ -107,7 +107,7 @@ export default function DashboardPage(){
   if(busy) return(
     <div className="space-y-3 animate-pulse p-2">
       <div className="h-5 w-40 bg-sand-200 rounded-lg"/>
-      <div className="grid grid-cols-2 sm:grid-cols-5 xl:grid-cols-10 gap-1.5 sm:gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-5 xl:grid-cols-10 gap-1.5 sm:gap-2 min-w-0">
         {[...Array(10)].map((_,i)=><div key={i} className="h-14 bg-sand-100 rounded-xl"/>)}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -138,7 +138,7 @@ export default function DashboardPage(){
   const roiSorted =[...(by_area||[])].sort((a:any,b:any)=>b.avg_roi-a.avg_roi)
 
   return(
-    <div className="w-full max-w-screen-2xl mx-auto space-y-3">
+    <div className="w-full max-w-screen-2xl mx-auto space-y-3 overflow-x-hidden">
 
       {/* Header */}
       <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-2">
@@ -155,7 +155,7 @@ export default function DashboardPage(){
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 xl:grid-cols-10 gap-1.5 sm:gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-5 xl:grid-cols-10 gap-1.5 sm:gap-2 min-w-0">
         <KPI label="Avg Price"  value={fmtEGP(kpis.avg_price)}           sub="All props"    icon="🏠" color="text-brand-600"/>
         <KPI label="Median"     value={fmtEGP(kpis.median_price)}         sub="50th pct"     icon="📊" color="text-brand-600"/>
         <KPI label="Price/m²"  value={fmtEGP(kpis.avg_price_per_sqm)}    sub="Market rate"  icon="📐" color="text-amber-600"/>

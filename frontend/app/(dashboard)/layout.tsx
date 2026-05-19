@@ -154,7 +154,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         'flex-1 min-h-screen',
         'lg:ml-56',           // desktop: offset for sidebar
         'pt-14 lg:pt-0',      // mobile: offset for top bar
-        'p-4 sm:p-6 lg:p-8', // responsive padding
+        'px-3 py-3 sm:px-5 sm:py-4 lg:px-8 lg:py-6', // responsive padding
       )}>
         {children}
       </main>

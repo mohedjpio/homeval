@@ -196,7 +196,7 @@ export default function TeamPage() {
   const members = TEAM.filter(m => m.role === 'Member')
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 space-y-10">
+    <div className="max-w-6xl mx-auto py-2 sm:py-4 space-y-6 sm:space-y-8 overflow-x-hidden">
 
       {/* Page header */}
       <div>

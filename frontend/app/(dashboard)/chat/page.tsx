@@ -56,7 +56,7 @@ export default function ChatPage() {
 
   return (
     // Full height minus top-bar on mobile, full on desktop
-    <div className="w-full max-w-4xl mx-auto animate-fade-up flex flex-col" style={{height:'calc(100dvh - 3.5rem - 2rem)'}}>
+    <div className="w-full max-w-4xl mx-auto animate-fade-up flex flex-col" style={{height:'calc(100svh - 3.5rem - 1.5rem)',minHeight:'400px'}}>
 
       <div className="flex gap-4 h-full min-h-0">
 
