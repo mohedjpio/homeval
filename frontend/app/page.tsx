@@ -61,6 +61,7 @@ export default function LandingPage() {
             <Link href="/analytics-guide-public" className="hover:text-brand-600 transition-colors">Analytics</Link>
             <Link href="/team-public"            className="hover:text-brand-600 transition-colors">Team</Link>
             <Link href="/docs"                   className="hover:text-brand-600 transition-colors">Docs</Link>
+            <Link href="/presentation"              className="hover:text-brand-600 transition-colors font-medium text-brand-600">Presentation</Link>
           </div>
 
           {/* Desktop CTA */}
@@ -102,6 +103,7 @@ export default function LandingPage() {
             <Link href="/analytics-guide-public" onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Analytics</Link>
             <Link href="/team-public"            onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Team</Link>
             <Link href="/docs"                   onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm text-sand-600 hover:text-brand-600 border-b border-sand-50">Docs</Link>
+            <Link href="/presentation"              onClick={()=>setMenuOpen(false)} className="block py-2.5 text-sm font-semibold text-brand-600 hover:text-brand-700 border-b border-sand-50">Presentation</Link>
             <div className="pt-2 flex flex-col gap-2">
               {authed ? (
                 <Link href="/dashboard" className="block w-full text-center bg-brand-500 text-white font-medium py-2.5 rounded-xl text-sm" onClick={()=>setMenuOpen(false)}>
